@@ -1,8 +1,9 @@
 <template>
   <div class="container">
     <el-row>
-      <el-col :span="4">
-        <div class="logo">系统名称</div>
+      <el-col :span="4" class="system-info">
+        <img class="logo" src="../assets/logo.png" alt="" />
+        <span class="system-name">系统名称</span>
       </el-col>
       <el-col :span="20">
         <el-menu
@@ -32,9 +33,23 @@ export default {
 <style lang="less" scoped>
 .container {
   width: 100%;
-  .logo {
-    line-height: 60px;
-    font-size: 18px;
+  .system-info {
+    position: relative;
+    height: 60px;
+    .logo {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      width: 40px;
+      height: 40px;
+      transform: translate(0, -50%);
+    }
+    .system-name {
+      position: absolute;
+      left: 60px;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
   }
   .nav {
     float: right;
