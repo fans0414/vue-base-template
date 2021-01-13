@@ -13,9 +13,10 @@
           text-color="#9d9d9d"
           active-text-color="#fff"
         >
-          <el-menu-item>
+          <el-menu-item v-if="!isSignIn">
             <router-link class="signBtn" to="/login">登录</router-link>
           </el-menu-item>
+        <el-menu-item v-else><a @click.prevent="logout">退出登录</a></el-menu-item>
         </el-menu>
       </el-col>
     </el-row>
@@ -24,8 +25,18 @@
 
 <script>
 export default {
+  computed: {
+    isSignIn() {
+      return this.$store.state.isSignIn;
+    },
+  },
   methods: {
-    logout() {},
+    logout() {
+      this.$message.success('退出登录!');
+      this.$router.push({ name: 'login' });
+      this.$store.commit('setToken', null);
+      this.$store.commit('changeIsSignIn', false);
+    },
   },
 };
 </script>
@@ -53,6 +64,7 @@ export default {
   }
   .nav {
     float: right;
+    line-height: 60px;
     li {
       padding: 0;
       a {
