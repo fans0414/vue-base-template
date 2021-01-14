@@ -7,14 +7,17 @@ export default new Vuex.Store({
   state: {
     isSignIn: false,
     token: '',
+    userInfo: {},
   },
   mutations: {
-    setToken(state, val) {
-      console.log();
-      state.token = val;
-    },
     changeIsSignIn(state, val) {
       state.isSignIn = val;
+    },
+    setToken(state, val) {
+      state.token = val;
+    },
+    setUserInfo(state, user) {
+      state.userInfo = user;
     },
   },
   actions: {

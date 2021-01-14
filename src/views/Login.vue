@@ -88,6 +88,7 @@ export default {
         }
         this.$message.success('登录成功!');
         this.$store.commit('setToken', res.data.token);
+        this.$store.commit('setUserInfo', res.data);
         this.$store.commit('changeIsSignIn', true);
         this.$router.push({ name: 'home' });
       });

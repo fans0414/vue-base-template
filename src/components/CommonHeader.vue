@@ -12,11 +12,17 @@
           background-color="#2d2d2d"
           text-color="#9d9d9d"
           active-text-color="#fff"
+          @select="handleSelect"
         >
           <el-menu-item v-if="!isSignIn">
             <router-link class="signBtn" to="/login">登录</router-link>
           </el-menu-item>
-        <el-menu-item v-else><a @click.prevent="logout">退出登录</a></el-menu-item>
+
+          <el-submenu index="1" v-else>
+            <template slot="title">{{ userInfo.username }}</template>
+            <el-menu-item index="1-1">个人中心</el-menu-item>
+            <el-menu-item index="1-2">退出登录</el-menu-item>
+          </el-submenu>
         </el-menu>
       </el-col>
     </el-row>
@@ -29,6 +35,9 @@ export default {
     isSignIn() {
       return this.$store.state.isSignIn;
     },
+    userInfo() {
+      return this.$store.state.userInfo;
+    },
   },
   methods: {
     logout() {
@@ -36,6 +45,18 @@ export default {
       this.$router.push({ name: 'login' });
       this.$store.commit('setToken', null);
       this.$store.commit('changeIsSignIn', false);
+    },
+    handleSelect(key) {
+      switch (key) {
+        case '1-1':
+          this.$router.push({ name: 'person' });
+          break;
+        case '1-2':
+          this.logout();
+          break;
+        default:
+          break;
+      }
     },
   },
 };
